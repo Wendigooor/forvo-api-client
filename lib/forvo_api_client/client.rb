@@ -1,14 +1,5 @@
-module ForvoApi
+module ForvoApiClient
   class Client
-    API_URL = 'http://apifree.forvo.com/'.freeze
-    LIMIT_REACHED = 'Limit/day reached.'.freeze
-    INCORRECT_DOMAIN = 'Calling from incorrect domain.'.freeze
-    INVALID_VALUE = 'Invalid value'.freeze
-
-    LimitReachedError = Class.new(StandardError)
-    IncorrectDomainError = Class.new(StandardError)
-    InvalidValueError = Class.new(StandardError)
-
     attr_reader :api_key
 
     def initialize(api_key)
