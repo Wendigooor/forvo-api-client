@@ -1,6 +1,6 @@
 # ForvoApiClient
 
-TODO: Write a gem description
+[Forvo API](http://api.forvo.com/) client
 
 ## Installation
 

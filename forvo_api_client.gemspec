@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = ForvoApiClient::VERSION
   spec.authors       = ["FoboCasteR"]
   spec.email         = ["fobocaster@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{Forvo API client}
+  spec.summary       = %q{Forvo API client}
+  spec.homepage      = "https://github.com/FoboCasteR/forvo-api-client"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
