@@ -34,23 +34,26 @@ module ForvoApiClient
     #     - rate-desc
     #   - limit
     def send_request!(action, word, options = {})
-      params = [
-        :format, 'json',
-        :action, action,
-        :key, api_key,
-        :word, word
-      ].concat(options.to_a) * ?/
-
-      response = Net::HTTP.get(URI.parse(URI.encode(API_URL + params)))
+      path = options_to_path(action, options.merge(word: word))
+      response = Net::HTTP.get(API_DOMAIN, path)
       data = JSON.parse(response)
 
       if data.is_a?(Array)
-        raise LimitReachedError, LIMIT_REACHED if data.first == LIMIT_REACHED
-        raise IncorrectDomainError, INCORRECT_DOMAIN if data.first == INCORRECT_DOMAIN
-        raise InvalidValueError, data.first if data.first.start_with? INVALID_VALUE
+        error_message = data.first
+        raise LimitReachedError, LIMIT_REACHED if error_message == LIMIT_REACHED
+        raise IncorrectDomainError, INCORRECT_DOMAIN if error_message == INCORRECT_DOMAIN
+        raise InvalidValueError, error_message if error_message.start_with? INVALID_VALUE
       end
 
       data
+    end
+
+    def options_to_path(action, options)
+      [
+        :format, 'json',
+        :action, action,
+        :key, api_key,
+      ].concat(options.to_a).join('/').prepend('/')
     end
   end
 end
