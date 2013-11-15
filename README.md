@@ -1,5 +1,7 @@
 # ForvoApiClient
 
+[![Code Climate](https://codeclimate.com/github/FoboCasteR/forvo-api-client.png)](https://codeclimate.com/github/FoboCasteR/forvo-api-client)
+
 [Forvo API](http://api.forvo.com/) client
 
 ## Installation
@@ -18,7 +20,12 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+forvo_api = ForvoApiClient::Client.new(API_KEY)
+forvo_api.word_pronunciations('word', options)
+# Wrap response items into objects:
+forvo_api.word_pronunciations('word', options.merge(:wrap_into_objects => true))
+```
 
 ## Contributing
 
