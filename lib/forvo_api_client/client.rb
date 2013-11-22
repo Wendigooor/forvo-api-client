@@ -20,20 +20,6 @@ module ForvoApiClient
 
     private
 
-    # Options:
-    #   - language
-    #   - username
-    #   - sex
-    #     - m
-    #     - f
-    #   - rate
-    #   - order
-    #     - date-asc
-    #     - date-desc
-    #     - rate-asc
-    #     - rate-desc
-    #   - limit
-
     def fetch!(path, limit = 10)
       raise ArgumentError, 'too many HTTP redirects' if limit == 0
 
