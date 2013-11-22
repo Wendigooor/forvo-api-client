@@ -37,8 +37,6 @@ module ForvoApiClient
     def fetch!(path, limit = 10)
       raise ArgumentError, 'too many HTTP redirects' if limit == 0
 
-      binding.pry
-
       response = Net::HTTP.get_response(API_DOMAIN, path)
 
       case response
