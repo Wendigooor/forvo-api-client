@@ -33,9 +33,24 @@ module ForvoApiClient
     #     - rate-asc
     #     - rate-desc
     #   - limit
+
+    def fetch!(path, limit = 10)
+      raise ArgumentError, 'too many HTTP redirects' if limit == 0
+
+      binding.pry
+
+      response = Net::HTTP.get_response(API_DOMAIN, path)
+
+      case response
+      when Net::HTTPSuccess then response.body
+      when Net::HTTPRedirection then fetch!(response['location'], limit - 1)
+      else
+        response.error!
+      end
+    end
+
     def send_request!(action, word, options = {})
-      path = options_to_path(action, options.merge(word: word))
-      response = Net::HTTP.get(API_DOMAIN, path)
+      response = fetch!(options_to_path(action, options.merge(word: word)))
       data = JSON.parse(response)
 
       if data.is_a?(Array)
