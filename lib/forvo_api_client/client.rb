@@ -1,3 +1,5 @@
+require 'cgi'
+
 module ForvoApiClient
   class Client
     attr_reader :api_key
@@ -34,7 +36,7 @@ module ForvoApiClient
     end
 
     def send_request!(action, word, options = {})
-      response = fetch!(options_to_path(action, options.merge(word: word)))
+      response = fetch!(options_to_path(action, options.merge(word: CGI.escape(word))))
       data = JSON.parse(response)
 
       if data.is_a?(Array)
