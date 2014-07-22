@@ -36,7 +36,7 @@ module ForvoApiClient
     end
 
     def send_request!(action, word, options = {})
-      response = fetch!(options_to_path(action, options.merge(word: CGI.escape(word))))
+      response = fetch!(options_to_path(action, options.merge(word: word)))
       data = JSON.parse(response)
 
       if data.is_a?(Array)
@@ -54,7 +54,7 @@ module ForvoApiClient
         :format, 'json',
         :action, action,
         :key, api_key,
-      ].concat(options.to_a).join('/').prepend('/')
+      ].concat(options.to_a).flatten.map { |option| CGI.escape(option.to_s) }.join('/').prepend('/')
     end
   end
 end
