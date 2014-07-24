@@ -1,3 +1,5 @@
+require 'cgi'
+
 module ForvoApiClient
   class Client
     attr_reader :api_key
@@ -52,7 +54,7 @@ module ForvoApiClient
         :format, 'json',
         :action, action,
         :key, api_key,
-      ].concat(options.to_a).join('/').prepend('/')
+      ].concat(options.to_a).flatten.map { |option| CGI.escape(option.to_s) }.join('/').prepend('/')
     end
   end
 end
