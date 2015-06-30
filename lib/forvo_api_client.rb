@@ -5,7 +5,7 @@ require 'json'
 require 'ostruct'
 
 module ForvoApiClient
-  API_DOMAIN = 'apifree.forvo.com'.freeze
+  API_DOMAIN = 'apicommercial.forvo.com'.freeze
   LIMIT_REACHED = 'Limit/day reached.'.freeze
   INCORRECT_DOMAIN = 'Calling from incorrect domain.'.freeze
   INVALID_VALUE = 'Invalid value'.freeze
